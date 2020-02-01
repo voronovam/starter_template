@@ -26,7 +26,7 @@ gulp.task('scss', function() {
 });
 
 gulp.task('pug', function () {
-    return gulp.src('app/pug/pages/*.pug')
+    return gulp.src('app/pug/*.pug')
         .pipe(pug({
             pretty: true
         }))
