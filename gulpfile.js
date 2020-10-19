@@ -1,26 +1,26 @@
 const   gulp       = require('gulp'),
-        scss         = require('gulp-sass'),
-        cssnano = require('gulp-cssnano'),
-        rename = require('gulp-rename'),
-        pug         = require('gulp-pug'),
-        concat = require('gulp-concat'),
-        uglify = require('gulp-uglifyjs'),
-        server  = require('browser-sync'),
-        autoprefixer = require('gulp-autoprefixer'),
-        imagemin = require('gulp-imagemin'),
-        pngquant = require('imagemin-pngquant'),
-        mozjpeg = require('imagemin-mozjpeg'),
-        svgmin = require('gulp-svgmin'),
-        cheerio = require('gulp-cheerio'),
-        replace = require('gulp-replace'),
-        svgsprite = require('gulp-svg-sprite');
+    sass         = require('gulp-sass'),
+    cssnano = require('gulp-cssnano'),
+    rename = require('gulp-rename'),
+    pug         = require('gulp-pug'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglifyjs'),
+    server  = require('browser-sync'),
+    autoprefixer = require('gulp-autoprefixer'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
+    mozjpeg = require('imagemin-mozjpeg'),
+    svgmin = require('gulp-svgmin'),
+    cheerio = require('gulp-cheerio'),
+    replace = require('gulp-replace'),
+    svgsprite = require('gulp-svg-sprite');
 
-gulp.task('scss', function() {
-    return gulp.src('app/scss/**/*.scss')
-        .pipe(scss())
+gulp.task('sass', function() {
+    return gulp.src('app/sass/**/*.+(scss|sass)')
+        .pipe(sass())
         .pipe(autoprefixer(['last 1 versions', '> 1%', 'ie 11'], { cascade: true }))
         .pipe(cssnano())
-        .pipe(rename({suffix: '.min'}))
+        //.pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('dist/css'))
         .pipe(server.reload({stream: true}))
 });
@@ -50,15 +50,15 @@ gulp.task('fonts', function(){
         .pipe(server.reload({stream: true}));
 });
 
-gulp.task('js_libs', function(){
+/*gulp.task('js_libs', function(){
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
-        //'node_modules/nouislider/distribute/nouislider.min.js',
+
     ])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
-});
+});*/
 
 gulp.task('server', function() {
     server({
@@ -112,11 +112,12 @@ gulp.task('svg', () => {
 
 gulp.task('watch', function() {
     gulp.watch('app/pug/**/*.pug', gulp.series('pug'));
-    gulp.watch('app/scss/**/*.scss', gulp.series('scss'));
+    gulp.watch('app/sass/**/*.sass', gulp.series('sass'));
     gulp.watch('app/img/*', gulp.series('images'));
     gulp.watch('app/fonts/*', gulp.series('fonts'));
     gulp.watch('app/img/svg/*', gulp.series('svg'));
     gulp.watch('app/js/main.js', gulp.series('js'));
 });
 
-gulp.task('default', gulp.parallel('pug', 'scss', 'images', 'svg', 'fonts', 'js_libs', 'js', 'server', 'watch'));
+//gulp.task('default', gulp.parallel('pug', 'sass', 'images', 'svg', 'fonts', 'js_libs', 'js', 'server', 'watch'));
+gulp.task('default', gulp.parallel('pug', 'sass', 'images', 'svg', 'fonts', 'js', 'server', 'watch'));
