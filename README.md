@@ -1,4 +1,4 @@
-![Start Template](../img/start_template.png)
+![Start Template](https://raw.githubusercontent.com/voronovam/start-template/master/start_template.png)
 
 # Start Template
 
