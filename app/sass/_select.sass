@@ -1,0 +1,20 @@
+﻿.select
+  $self: &
+  position: relative
+  color: var(--color-text)
+
+  &__select
+    appearance: none
+    outline: none
+    padding: 11px 16px
+    background: var(--color-bg)
+    border: 1px solid var(--color-text)
+    border-radius: $border-radius
+    width: 100%
+
+    &:focus
+      border: 1px solid var(--color-text)
+
+    & option:not(:first-of-type)
+      color: var(--color-text)
+      opacity: .5
