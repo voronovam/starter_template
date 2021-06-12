@@ -1,0 +1,51 @@
+﻿.range
+  &__input
+    appearance: none
+    width: 100%
+    background: transparent
+    &::-webkit-slider-runnable-track
+      width: 100%
+      height: 20px
+      background: var(--color-text)
+      border-radius: $border-radius
+      border: 0 solid var(--color-bg)
+      cursor: pointer
+    &::-moz-range-track
+      width: 100%
+      height: 20px
+      background: var(--color-text)
+      border-radius: $border-radius
+      animate: 0.2s
+      border: 0 solid var(--color-bg)
+      cursor: pointer
+    &::-webkit-slider-thumb
+      appearance: none
+      border: 0 solid var(--color-text)
+      border-radius: 2px
+      height: 40px
+      width: 12px
+      margin-top: -9px
+      background-image: url("../img/svg/range-thumb.svg")
+      background-color: var(--color-text)
+      background-repeat: no-repeat
+      background-position: center
+      box-shadow: 0 1px 4px rgba(58, 58, 58, 0.3)
+      cursor: pointer
+
+    &::-moz-range-thumb
+      border: 0 solid var(--color-bg)
+      border-radius: 2px
+      height: 40px
+      width: 12px
+      margin-top: -9px
+      background-image: url("../img/range-thumb.svg")
+      background-color: var(--color-text)
+      background-repeat: no-repeat
+      background-position: center
+      box-shadow: 0 1px 4px rgba(58, 58, 58, 0.3)
+      cursor: pointer
+
+    &:focus
+      outline: none
+      &::-webkit-slider-runnable-track
+        background: var(--color-text)

@@ -1,0 +1,33 @@
+﻿.theme-toggle
+  margin-top: 16px
+  &__label
+    margin-bottom: 8px
+  &__btn-box
+    display: flex
+    justify-content: space-between
+    padding: 4px
+    border-radius: $border-radius
+    &:after
+      content: ''
+      display: inline-block
+      height: 100%
+      width: 1px
+      background: var(--color-Strock)
+  &__btn
+    
+    color: inherit
+    text-align: center
+    flex: 1 0 auto
+    line-height: 24px
+    font-family: $font-regular
+    border-radius: $border-radius
+    transition: $transition-base
+    
+    &.active,
+    &:hover
+      font-family: $font-bold
+      color: $color-white
+      background: var(--color-text)
+      box-shadow: 0 1px 4px rgba(58, 58, 58, 0.3)
+    & + &
+      margin-left: 8px
