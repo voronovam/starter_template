@@ -1,0 +1,23 @@
+﻿//TODO fix fonts
+@font-face {
+  font-family: 'Play-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Play-Regular.woff') format('woff'),
+    url('../fonts/Play-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Play-Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Play-Bold.woff') format('woff'),
+    url('../fonts/Play-Bold.woff2') format('woff2');
+}
+
+:root {
+  --font-regular: 'Play-Regular', Montserrat, Roboto, Arial, Tahoma, sans-serif;
+  --font-bold: 'Play-Bold', Montserrat, Roboto, Arial, Tahoma, sans-serif;
+}

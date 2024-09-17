@@ -1,0 +1,43 @@
+﻿.theme-toggle {
+  margin-top: 16px;
+
+  &__label {
+    margin-bottom: 8px;
+  }
+
+  &__btn-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px;
+    border-radius: var(--border-radius);
+  }
+
+  &__btn {
+    color: inherit;
+    text-align: center;
+    flex: 1 0 auto;
+    line-height: 24px;
+    font-family: var(--font-regular);
+    border-radius: var(--border-radius);
+    transition: var(--transition-base);
+
+    &.active,
+    &:hover,
+    &:focus-visible {
+      font-family: var(--font-bold);
+      box-shadow: 0 1px 4px rgba(58, 58, 58, 0.3);
+
+      color: var(--light-color);
+      background-color: var(--dark-color);
+
+      @media screen and (prefers-color-scheme: dark) {
+        color: var(--dark-color);
+        background-color: var(--light-color);
+      }
+    }
+
+    & + & {
+      margin-left: 8px;
+    }
+  }
+}

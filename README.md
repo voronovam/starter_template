@@ -1,11 +1,18 @@
-![Start Template](https://raw.githubusercontent.com/voronovam/start-template/master/start_template.png)
+# Starter Template
 
-# Start Template
+## Installation
 
-### Installation
+```bash
+npm install
+```
 
-`npm install`
+## Run Project
 
-### Run Project
+```bash
+gulp serve
+```
 
-`gulp`
+## Remove dist folder
+```bash
+gulp clean
+```

@@ -1,156 +1,41 @@
-const gulp = require('gulp'),
-  sass = require('gulp-sass'),
-  cssnano = require('gulp-cssnano'),
-  rename = require('gulp-rename'),
-  pug = require('gulp-pug'),
-  concat = require('gulp-concat'),
-  uglify = require('gulp-uglifyjs'),
-  server = require('browser-sync'),
-  autoprefixer = require('gulp-autoprefixer'),
-  //imagemin = require('gulp-imagemin'),
-  pngquant = require('imagemin-pngquant'),
-  mozjpeg = require('imagemin-mozjpeg'),
-  svgmin = require('gulp-svgmin'),
-  cheerio = require('gulp-cheerio'),
-  replace = require('gulp-replace'),
-  svgsprite = require('gulp-svg-sprite');
+const gulp = require('gulp');
+const clean = require('./gulp-tasks/gulp-clean');
+const styles = require('./gulp-tasks/gulp-styles');
+const scripts = require('./gulp-tasks/gulp-scripts');
+const pugTemplates = require('./gulp-tasks/gulp-pug');
+const { images, svg } = require('./gulp-tasks/gulp-images');
+const fonts = require('./gulp-tasks/gulp-fonts');
+const browserSync = require('browser-sync').create();
 
-gulp.task('sass', function () {
-  return (
-    gulp
-      .src('app/sass/**/*.+(scss|sass)')
-      .pipe(sass())
-      .pipe(
-        autoprefixer(['last 1 versions', '> 1%', 'ie 11'], { cascade: true })
-      )
-      .pipe(cssnano())
-      //.pipe(rename({suffix: '.min'}))
-      .pipe(gulp.dest('dist/css'))
-      .pipe(server.reload({ stream: true }))
-  );
-});
+function serve(done) {
+    browserSync.init({
+        server: {
+            baseDir: 'dist'
+        },
+        port: 8080,
+        open: false,
+        notify: false,
+    });
+    done();
+}
 
-gulp.task('pug', function () {
-  return gulp
-    .src('app/pug/[^_]*.pug')
-    .pipe(
-      pug({
-        pretty: true,
-      })
-    )
-    .pipe(gulp.dest('dist'))
-    .pipe(server.reload({ stream: true }));
-});
+function reload(done) {
+    browserSync.reload();
+    done();
+}
 
-gulp.task('js', function () {
-  return gulp
-    .src(['app/js/**/*.js'])
-    .pipe(gulp.dest('dist/js'))
-    .pipe(server.reload({ stream: true }));
-});
+function watchFiles() {
+    gulp.watch('src/scss/**/*.scss', gulp.series(styles, reload));
+    gulp.watch('src/js/**/*.js', gulp.series(scripts, reload));
+    gulp.watch('src/pug/**/*.pug', gulp.series(pugTemplates, reload));
+    gulp.watch('src/fonts/**/*', gulp.series(fonts, reload));
+    gulp.watch(['src/images/**/*.{jpg,jpeg,png,gif}', '!src/images/svg/**/*'], gulp.series(images, reload));
+    gulp.watch('src/images/svg/**/*.svg', gulp.series(svg, reload));
+}
 
-gulp.task('fonts', function () {
-  return gulp
-    .src(['app/fonts/*'])
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe(server.reload({ stream: true }));
-});
+const build = gulp.series(clean, gulp.parallel(styles, scripts, pugTemplates, fonts, images, svg));
+exports.serve = gulp.series(build, serve, watchFiles);
 
-/*gulp.task('js_libs', function(){
-    return gulp.src([
-        'node_modules/jquery/dist/jquery.min.js',
-
-    ])
-        .pipe(concat('libs.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
-});*/
-
-gulp.task('server', function () {
-  server({
-    server: {
-      baseDir: 'dist',
-    },
-    notify: false,
-  });
-});
-
-gulp.task('images', function () {
-  return (
-    gulp
-      .src('app/img/*')
-      // .pipe(
-      //   imagemin(
-      //     [
-      //       pngquant(),
-      //       mozjpeg({
-      //         progressive: true,
-      //       }),
-      //     ],
-      //     {
-      //       verbose: true,
-      //     }
-      //   )
-      // )
-      .pipe(gulp.dest('dist/img/'))
-      .pipe(server.reload({ stream: true }))
-  );
-});
-
-gulp.task('svg', () => {
-  return (
-    gulp
-      .src('app/img/svg/*')
-      .pipe(
-        svgmin({
-          js2svg: {
-            pretty: true,
-          },
-        })
-      )
-      .pipe(
-        cheerio({
-          run: function ($) {
-            $('[fill]').removeAttr('fill');
-            $('[stroke]').removeAttr('stroke');
-            $('[style]').removeAttr('style');
-          },
-          parseOptions: { xmlMode: true },
-        })
-      )
-      .pipe(replace('&gt;', '>'))
-      /*.pipe(svgsprite({
-            mode: {
-                symbol: {
-                    sprite: "sprite.svg"
-                }
-            }
-        }))*/
-      .pipe(gulp.dest('dist/img/svg/'))
-      .pipe(server.reload({ stream: true }))
-  );
-});
-
-gulp.task('watch', function () {
-  gulp.watch('app/pug/**/*.pug', gulp.series('pug'));
-  gulp.watch('app/sass/**/*.sass', gulp.series('sass'));
-  gulp.watch('app/img/*', gulp.series('images'));
-  gulp.watch('app/fonts/*', gulp.series('fonts'));
-  gulp.watch('app/img/svg/*', gulp.series('svg'));
-  gulp.watch('app/js/*.js', gulp.series('js'));
-});
-
-//gulp.task('default', gulp.parallel('pug', 'sass', 'images', 'svg', 'fonts', 'js_libs', 'js', 'server', 'watch'));
-gulp.task(
-  'default',
-  gulp.parallel(
-    'pug',
-    'sass',
-    'images',
-    'svg',
-    'fonts',
-    'js',
-    'server',
-    'watch'
-  )
-);
+exports.clean = clean;
+exports.build = build;
+exports.default = gulp.series(build, serve, watchFiles);

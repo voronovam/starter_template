@@ -1,0 +1,43 @@
+html(lang="en")
+  include parts/head.pug
+
+  body(data-theme='dark')
+    include blocks/TheHeader.pug
+
+    main.container
+      include parts/content.pug
+
+      .row.align-center
+        .w-50.mt-24
+          h2 Select
+          include ui/select.pug
+
+        .w-50.mt-24
+          h2 Checkbox
+          include ui/checkbox.pug
+
+        .w-50.mt-24
+          h2 Switcher
+          include ui/switcher.pug
+
+      .mt-24
+        h2 Range
+        include ui/range.pug
+
+      .mt-24
+        h2 Details
+        include ui/details.pug
+
+      .mt-24
+        h2 Popover
+        include ui/popover.pug
+
+      .theme-toggle
+        .theme-toggle__label Switch Theme Mode
+        .row
+            .w-50
+                .theme-toggle__btn-box
+                    button.theme-toggle__btn.active#light Light
+                    button.theme-toggle__btn#dark Dark
+
+    include blocks/TheFooter.pug
