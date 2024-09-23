@@ -1,11 +1,12 @@
-﻿//TODO fix fonts
-@font-face {
+﻿@font-face {
   font-family: 'Play-Regular';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/Play-Regular.woff') format('woff'),
-    url('../fonts/Play-Regular.woff2') format('woff2');
+  src: local('Play Regular'), local('Play-Regular'),
+    url('../fonts/Play-Regular.woff') format('woff'),
+    url('../fonts/Play-Regular.woff2') format('woff2'),
+    url('../fonts/Play-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -13,8 +14,10 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../fonts/Play-Bold.woff') format('woff'),
-    url('../fonts/Play-Bold.woff2') format('woff2');
+  src: local('Play Bold'), local('Play-Bold'),
+    url('../fonts/Play-Bold.woff') format('woff'),
+    url('../fonts/Play-Bold.woff2') format('woff2'),
+    url('../fonts/Play-Bold.ttf') format('truetype');
 }
 
 :root {

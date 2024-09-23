@@ -1,4 +1,4 @@
-﻿.check {
+﻿.ui-checkbox {
   padding-left: 1.4em;
   position: relative;
   cursor: pointer;
@@ -6,16 +6,21 @@
   &__input {
     @include visually-hidden;
 
-    &:focus + .check__box {
+    &:focus + .ui-checkbox__box {
       border-color: var(--text-color);
     }
 
-    &:checked + .check__box {
+    &:checked + .ui-checkbox__box {
       border-color: var(--text-color);
       background-color: var(--text-color);
       background-image: url('../images/svg/check.svg');
       background-repeat: no-repeat;
       background-position: center;
+
+      @media screen and (prefers-color-scheme: dark) {
+        border-color: var(--light-color);
+        background-color: var(--dark-color);
+      }
     }
   }
 

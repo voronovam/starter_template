@@ -1,0 +1,48 @@
+[data-theme='light'] {
+  --mode-color: 'light';
+  --text-color: #181818;
+  --background-color: #fdfdfd;
+  --error-color: tomato;
+}
+
+[data-theme='dark'] {
+  --mode-color: 'dark';
+  --text-color: #fdfdfd;
+  --background-color: #181818;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.container {
+  max-width: var(--desktop);
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.the-header,
+.the-footer {
+  padding: 16px 0;
+}
+
+.main {
+  padding: 40px 0;
+
+  &__item {
+    padding: 24px 0;
+  }
+
+  &__item-title {
+    margin-bottom: 16px;
+  }
+}
+
+.page-headline {
+  margin-bottom: 16px;
+}
+
+.page-subtitle {
+  margin-bottom: 24px;
+  font-size: 18px;
+}

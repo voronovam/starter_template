@@ -1,9 +1,11 @@
 @import 'fonts';
 @import 'vars';
 @import 'mixin';
-@import 'default';
+@import 'reset';
+@import 'helpers';
 @import 'select';
 @import 'switcher';
 @import 'checkbox';
 @import 'range';
+@import 'details';
 @import 'theme-toggle';

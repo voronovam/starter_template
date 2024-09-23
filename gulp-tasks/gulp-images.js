@@ -24,6 +24,7 @@ async function svg() {
             svgo({
                 plugins: [
                     { name: 'removeViewBox', active: false },
+                    { name: 'removeDimensions', active: true },
                 ]
             })
         ]))

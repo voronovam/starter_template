@@ -1,43 +1,35 @@
 html(lang="en")
-  include parts/head.pug
+  include parts/head
 
   body(data-theme='dark')
-    include blocks/TheHeader.pug
+    include blocks/TheHeader
 
-    main.container
-      include parts/content.pug
+    .container
+      main.main
+        include parts/content
 
-      .row.align-center
-        .w-50.mt-24
-          h2 Select
-          include ui/select.pug
+        .main__item
+          h2.main__item-title Select
+          include ui/select
 
-        .w-50.mt-24
-          h2 Checkbox
-          include ui/checkbox.pug
+        .main__item
+          h2.main__item-title Checkbox
+          include ui/checkbox
 
-        .w-50.mt-24
-          h2 Switcher
-          include ui/switcher.pug
+        .main__item
+          h2.main__item-title Switcher
+          include ui/switcher
 
-      .mt-24
-        h2 Range
-        include ui/range.pug
+        .main__item
+          h2.main__item-title Range
+          include ui/range
 
-      .mt-24
-        h2 Details
-        include ui/details.pug
+        .main__item
+          h2.main__item-title Details
+          include ui/details
 
-      .mt-24
-        h2 Popover
-        include ui/popover.pug
+        .main__item
+          h2.main__item-title Popover
+          include ui/popover
 
-      .theme-toggle
-        .theme-toggle__label Switch Theme Mode
-        .row
-            .w-50
-                .theme-toggle__btn-box
-                    button.theme-toggle__btn.active#light Light
-                    button.theme-toggle__btn#dark Dark
-
-    include blocks/TheFooter.pug
+    include blocks/TheFooter
